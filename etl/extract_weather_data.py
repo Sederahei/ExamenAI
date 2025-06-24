@@ -10,7 +10,9 @@ def extract_data():
         'cairo': {'lat': 30.04, 'lon': 31.23},
         'mahajanga-madagascar': {'lat': -18.91, 'lon': 46.31}
     }
-
+     if not os.path.exists('data'):
+        os.makedirs('data')
+        
     for city, coords in cities.items():
         url = f"https://api.open-meteo.com/v1/forecast?latitude={coords['lat']}&longitude={coords['lon']}&hourly=temperature_2m,precipitation"
 
