@@ -21,7 +21,7 @@ with DAG(
     dag_id='weather_comparison_pipeline',
     default_args=default_args,
     start_date=datetime(2025, 6, 1),
-    schedule_interval='@daily',  # exécuter tous les jours
+    schedule='@daily',  # exécuter tous les jours
     catchup=False
 ) as dag:
 
