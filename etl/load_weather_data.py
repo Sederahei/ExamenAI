@@ -1,9 +1,9 @@
 import os
 import pandas as pd
 
-def load_data():
+def load_data(start_date_str: str, end_date_str: str): # Ajout des paramètres pour la cohérence
     data_dir = "data"
-    combined_file_path = os.path.join(data_dir, "all_cities_transformed.csv")
+    combined_file_path = os.path.join(data_dir, "all_cities_transformed_hourly.csv") # Charger le fichier horaire
 
     if not os.path.exists(combined_file_path):
         print(f"Erreur: Le fichier combiné '{combined_file_path}' n'a pas été trouvé. La tâche de transformation a peut-être échoué.")
@@ -15,8 +15,11 @@ def load_data():
         print(f"Aperçu des 5 premières lignes des données chargées :\n{df.head()}")
         print(f"Informations sur le DataFrame :\n{df.info()}")
         
-        # Ici, vous pouvez ajouter des étapes de chargement vers une base de données, un data warehouse, etc.
-        # Pour l'instant, nous nous contentons d'afficher les informations pour prouver que le chargement est réussi.
+        # Vous pouvez également charger le résumé quotidien si vous en avez besoin ici
+        daily_summary_file_path = os.path.join(data_dir, "all_cities_transformed_daily_summary.csv")
+        if os.path.exists(daily_summary_file_path):
+            daily_df = pd.read_csv(daily_summary_file_path)
+            print(f"\nAperçu du résumé quotidien :\n{daily_df.head()}")
 
     except Exception as e:
         print(f"Erreur lors du chargement du fichier '{combined_file_path}': {e}")
