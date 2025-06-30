@@ -1,8 +1,10 @@
+import os
+
 import json
 import pandas as pd
 
 def transform_data():
-    cities = ['paris', 'new_york', 'tokyo', 'cairo','mahajanga-madagascar']
+    cities = ['paris', 'new_york', 'tokyo', 'cairo', 'mahajanga-madagascar']
 
     for city in cities:
         with open(f"data/{city}_raw.json") as f:
@@ -22,3 +24,4 @@ def transform_data():
         df['is_rainy'] = df['precipitation'] > 1.0
 
         df.to_csv(f"data/{city}_transformed.csv", index=False)
+

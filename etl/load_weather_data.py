@@ -1,3 +1,6 @@
+import os
+import pandas as pd
+
 import pandas as pd
 
 def load_data():
@@ -5,5 +8,4 @@ def load_data():
 
     for city in cities:
         df = pd.read_csv(f"data/{city}_transformed.csv")
-        # Ici je charger vers unema base de données ou laisser les fichiers CSV(izay tiko)
-        print(f"{city} - Données prêtes : {len(df)} lignes")
+

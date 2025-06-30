@@ -1,15 +1,16 @@
 import sys
 import os
-sys.path.append('/home/sedera/airflow/dags/comparaison_climatique-exam')
-
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
+dag_dir = os.path.dirname(os.path.abspath(__file__))  # /home/sedera/airflow/dags/comparaison_climatique-exam/dags
+project_dir = os.path.abspath(os.path.join(dag_dir, '..'))  # -> comparaison_climatique-exam
+if project_dir not in sys.path:
+    sys.path.insert(0, project_dir)
 from etl.extract_weather_data import extract_data
 from etl.transform_weather_data import transform_data
 from etl.load_weather_data import load_data
-
 
 default_args = {
     'owner': 'airflow',
@@ -18,7 +19,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='weather_comparison_pipeline',
+    dag_id='weather_comparaison_pipeline',
     default_args=default_args,
     start_date=datetime(2025, 6, 1),
     schedule='@daily',  # exécuter tous les jours
